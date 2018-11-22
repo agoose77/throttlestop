@@ -12,6 +12,8 @@ Activate service with
 systemctl daemon-reload
 systemctl enable throttlestop
 systemctl start throttlestop
+systemctl enable throttlestop.timer
+systemctl start throttlestop.timer
 ```
 
 Inspired by:
