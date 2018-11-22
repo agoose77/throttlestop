@@ -33,9 +33,6 @@ def main():
     voltage_parser = subparsers.add_parser('voltage')
     voltage_parser.add_argument("voltage", default={}, nargs='?', type=loads)
 
-    # for name, index in MSR_VOLTAGE_PLANES.items():
-    #     voltage_parser.add_argument(f"--{name}", type=int)
-
     args = parser.parse_args()
     if not vars(args):
         return
