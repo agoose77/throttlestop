@@ -1,14 +1,15 @@
 from pathlib import Path
+import sys
 
-service_script = """
+service_script = f"""
 [Unit]
 Description=throttlestop
 
 [Service]
 Type=oneshot
 User=root
-ExecStart=throttlestop voltage '{"cache": -149, "cpu": -149}'
-ExecStart=throttlestop tdp '{"first": {"power_limit": 30}}'
+ExecStart={sys.executable!r} -m throttlestop voltage '{{"cache": -149, "cpu": -149}}'
+ExecStart={sys.executable!r} -m throttlestop tdp '{{"first": {{"power_limit": 30}}}}'
 
 [Install]
 WantedBy=multi-user.target
