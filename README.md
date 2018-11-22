@@ -7,6 +7,12 @@ Install tool with
 Install services with
 `sudo throttlestop-install-service`
 
+Activate service with
+```bash
+systemctl daemon-reload
+systemctl enable throttlestop
+systemctl start throttlestop
+```
 
 Inspired by:
 * https://github.com/mihic/linux-intel-undervolt
