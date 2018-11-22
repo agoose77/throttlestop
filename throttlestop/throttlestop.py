@@ -1,9 +1,9 @@
 from json import dumps, loads
 from types import SimpleNamespace
-from throttlestop.tools import NamespaceEncoder, namespace_object_hook
 
 from throttlestop.msr import MSR, parse_MSR_PKG_POWER_LIMIT, parse_MSR_RAPL_POWER_UNIT, build_MSR_PKG_POWER_LIMIT, \
     MSR_PKG_POWER_LIMIT_ADDR, MSR_RAPL_POWER_UNIT_ADDR, MSR_VOLTAGE_ADDR, parse_MSR_UNDERVOLTAGE, build_MSR_VOLTAGE
+from throttlestop.tools import NamespaceEncoder, namespace_object_hook
 
 
 def apply_delta(delta: dict, ns: SimpleNamespace):

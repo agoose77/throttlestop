@@ -7,7 +7,13 @@ from plumbum import cmd
 MSR_PKG_POWER_LIMIT_ADDR = 0x610
 MSR_RAPL_POWER_UNIT_ADDR = 0x606
 MSR_VOLTAGE_ADDR = 0x150
-N_PLANES = 5
+MSR_VOLTAGE_PLANES = {
+    'cpu': 0,
+    'gpu': 1,
+    'cache': 2,
+    'agent': 3,
+    'analog_io': 4,
+}
 
 
 def before(n):
@@ -130,7 +136,7 @@ def parse_MSR_UNDERVOLTAGE(value):
 
 
 def build_MSR_VOLTAGE(obj, allow_overvoltage=False):
-    assert obj.plane in range(N_PLANES)
+    assert obj.plane in MSR_VOLTAGE_PLANES.values()
     if obj.voltage is not None:
         assert isinstance(obj.voltage, int), obj.voltage
         if not allow_overvoltage:
