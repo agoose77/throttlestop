@@ -1,7 +1,12 @@
 # throttlestop
 Simple tool to manage thermal behaviour on Linux
 
-`pip install git+https://github.com/agoose77/throttlestop.git#egg=throttlestop`
+Install tool with 
+`sudo pip install git+https://github.com/agoose77/throttlestop.git#egg=throttlestop`
+
+Install services with
+`sudo throttlestop-install-service`
+
 
 Inspired by:
 * https://github.com/mihic/linux-intel-undervolt
