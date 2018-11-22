@@ -8,7 +8,7 @@ class NamespaceEncoder(JSONEncoder):
 
     def default(self, o):
         if isinstance(o, SimpleNamespace):
-            return {**vars(o), _NAMESPACE_KEY: True}
+            return {**{k: v for k, v in vars(o).items() if not k.startswith("_")}, _NAMESPACE_KEY: True}
         # Let the base class default method raise the TypeError
         return JSONEncoder.default(self, o)
 

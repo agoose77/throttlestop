@@ -6,7 +6,12 @@ Description=throttlestop
 
 [Service]
 Type=oneshot
-ExecStart=throttlestop voltage '{"cache": -149, "cpu": -149}';throttlestop tdp '{"first": {"power_limit": 30}}';
+User=root
+ExecStart=throttlestop voltage '{"cache": -149, "cpu": -149}'
+ExecStart=throttlestop tdp '{"first": {"power_limit": 30}}'
+
+[Install]
+WantedBy=multi-user.target
 """
 
 

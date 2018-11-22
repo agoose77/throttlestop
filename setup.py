@@ -12,7 +12,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'throttlestop = throttlestop:main',
+            'throttlestop = throttlestop.__main__:main',
             'throttlestop-install-service = throttlestop.install:main',
         ],
     },
