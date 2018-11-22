@@ -13,6 +13,7 @@ setup(
     entry_points={
         'console_scripts': [
             'throttlestop = throttlestop:main',
+            'throttlestop-install-service = throttlestop.install:main',
         ],
     },
 )

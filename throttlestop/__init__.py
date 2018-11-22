@@ -26,9 +26,7 @@ def main():
     subparsers = parser.add_subparsers(help='sub-command help')
 
     tdp_parser = subparsers.add_parser('tdp')
-    group = tdp_parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("-r", "--read", dest="read_tdp", action='store_true')
-    group.add_argument("-w", "--write", dest="write_tdp", type=loads)
+    tdp_parser.add_argument("tdp", default={}, nargs='?', type=loads)
 
     voltage_parser = subparsers.add_parser('voltage')
     voltage_parser.add_argument("voltage", default={}, nargs='?', type=loads)
@@ -39,29 +37,26 @@ def main():
 
     msr = MSR()
 
-    read_tdp = getattr(args, 'read_tdp', None)
-    write_tdp = getattr(args, 'write_tdp', None)
-
-    if read_tdp or write_tdp:
+    if hasattr(args, 'tdp'):
         MSR_RAPL_POWER_UNIT = msr.read(MSR_RAPL_POWER_UNIT_ADDR)
         units = parse_MSR_RAPL_POWER_UNIT(MSR_RAPL_POWER_UNIT)
 
         MSR_PKG_POWER_LIMIT = msr.read(MSR_PKG_POWER_LIMIT_ADDR)
         power_limits = parse_MSR_PKG_POWER_LIMIT(MSR_PKG_POWER_LIMIT, units)
 
-        if read_tdp:
-            print(dumps(power_limits, indent=4, cls=NamespaceEncoder))
-
-        else:
-            apply_delta(args.write_tdp, power_limits)
+        if args.tdp:
+            apply_delta(args.tdp, power_limits)
             result = build_MSR_PKG_POWER_LIMIT(power_limits, units)
             msr.write(MSR_PKG_POWER_LIMIT_ADDR, result)
 
             power_limits = parse_MSR_PKG_POWER_LIMIT(msr.read(MSR_PKG_POWER_LIMIT_ADDR), units)
-            print(dumps(power_limits, indent=4, cls=NamespaceEncoder))
+
+        print(dumps(power_limits, indent=4, cls=NamespaceEncoder))
 
     else:
         outputs = {}
+        voltages = args.voltage
+        assert voltages.keys() <= MSR_VOLTAGE_PLANES.keys()
         for name, index in MSR_VOLTAGE_PLANES.items():
             if name in args.voltage:
                 prompt = build_MSR_VOLTAGE(SimpleNamespace(plane=index, voltage=args.voltage[name]))

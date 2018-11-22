@@ -84,10 +84,10 @@ def build_MSR_PKG_POWER_LIMIT(_obj, _units, _max_power_limit=60):
 
 
 def _build_MSR_PKG_POWER_LIMIT_internal(_obj, _units, _max_power_limit):
-    assert isinstance(_obj.power_limit, Real)
-    assert isinstance(_obj.power_clamping_limit, bool)
-    assert isinstance(_obj.power_enabled, bool)
-    assert isinstance(_obj.power_limit_time_window, Real)
+    assert isinstance(_obj.power_limit, Real), _obj.power_limit
+    assert isinstance(_obj.power_clamping_limit, bool), _obj.power_clamping_limit
+    assert isinstance(_obj.power_enabled, bool), _obj.power_enabled
+    assert isinstance(_obj.power_limit_time_window, Real), _obj.power_limit_time_window
     assert 0. <= _obj.power_limit <= _max_power_limit, _obj.power_limit
     assert _obj.power_limit_time_window > 0.
 

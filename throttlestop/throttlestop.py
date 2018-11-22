@@ -70,6 +70,7 @@ def main():
             msr.write(MSR_VOLTAGE_ADDR, prompt)
             MSR_VOLTAGE = msr.read(MSR_VOLTAGE_ADDR)
             print(parse_MSR_UNDERVOLTAGE(MSR_VOLTAGE))
+
         else:
             prompt = build_MSR_VOLTAGE(SimpleNamespace(plane=voltage_plane, voltage=voltage_value))
             msr.write(MSR_VOLTAGE_ADDR, prompt)
