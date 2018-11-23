@@ -43,6 +43,8 @@ def main():
     line_prefix = f"{sys.executable} -m throttlestop "
     exec_line = "ExecStart={}"
 
+    print("Enter systemd configuration lines:")
+
     while True:
         line = input(line_prefix)
         if not line:
