@@ -38,7 +38,6 @@ def main():
     parser.add_argument("-i", "--interval", default="30s", type=str)
     parser.add_argument("-d", "--delay", default="4min", type=str)
     args = parser.parse_args()
-    print(args)
     lines = []
 
     line_prefix = f"{sys.executable} -m throttlestop "
