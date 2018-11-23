@@ -36,9 +36,9 @@ def main():
 
     parser = ArgumentParser()
     parser.add_argument("-i", "--interval", default="30s", type=str)
-    parser.add_argument("-d", "--delay", default="4min", type=int)
+    parser.add_argument("-d", "--delay", default="4min", type=str)
     args = parser.parse_args()
-
+    print(args)
     lines = []
 
     line_prefix = f"{sys.executable} -m throttlestop "
@@ -52,9 +52,13 @@ def main():
         lines.append(exec_line.format(line_prefix + line))
 
     target = Path("/etc/systemd/system/throttlestop.timer")
-    target.write_text(timer_script.format(interval=args.i, delay=args.d))
+    target.write_text(timer_script.format(interval=args.interval, delay=args.delay))
 
     service = Path("/etc/systemd/system/throttlestop.service")
-    service.write_text(service_script.format())
+    service.write_text(service_script.format('\n'.join(lines)))
 
     print("Finished configuring service!")
+
+
+if __name__ == "__main__":
+    main()
