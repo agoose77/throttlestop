@@ -1,5 +1,6 @@
 # throttlestop
-Simple tool to manage thermal behaviour on Linux
+Simple tool to manage thermal behaviour on Linux. Requires `msr-tools`:
+`sudo apt install msr-tools`
 
 Install tool with 
 `sudo pip install git+https://github.com/agoose77/throttlestop.git#egg=throttlestop`
