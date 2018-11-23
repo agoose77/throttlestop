@@ -55,7 +55,7 @@ def main():
     target.write_text(timer_script.format(interval=args.interval, delay=args.delay))
 
     service = Path("/etc/systemd/system/throttlestop.service")
-    service.write_text(service_script.format('\n'.join(lines)))
+    service.write_text(service_script.format(exec_lines='\n'.join(lines)))
 
     print("Finished configuring service!")
 
