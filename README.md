@@ -10,7 +10,7 @@ and configure the service using the interactive prompt:
 ```bash
 /usr/bin/python3 -m throttlestop voltage '{"cache": -149, "cpu": -149}'
 /usr/bin/python3 -m throttlestop tdp '{"first": {"power_limit": 30}}'
-/usr/bin/python3 -m throttlestop tdp # Hit return to exit
+/usr/bin/python3 -m throttlestop # Hit return to exit
 Finished configuring service!
 ```
 
