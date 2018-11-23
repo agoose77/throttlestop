@@ -22,8 +22,8 @@ Description=Apply throttlestop settings
 [Timer]
 Unit=throttlestop.service
 # Wait 2 minutes after boot before first applying
-OnBootSec=2min
-# Run every 30 seconds
+OnBootSec={delay}
+# Run every {interval}
 OnUnitActiveSec={interval}
 
 [Install]
@@ -35,7 +35,8 @@ def main():
     from argparse import ArgumentParser
 
     parser = ArgumentParser()
-    parser.add_argument("interval", default=30, type=int)
+    parser.add_argument("-i", "--interval", default="30s", type=str)
+    parser.add_argument("-d", "--delay", default="4min", type=int)
     args = parser.parse_args()
 
     lines = []
@@ -51,7 +52,7 @@ def main():
         lines.append(exec_line.format(line_prefix + line))
 
     target = Path("/etc/systemd/system/throttlestop.timer")
-    target.write_text(timer_script.format(interval=args.interval))
+    target.write_text(timer_script.format(interval=args.i, delay=args.d))
 
     service = Path("/etc/systemd/system/throttlestop.service")
     service.write_text(service_script.format())
