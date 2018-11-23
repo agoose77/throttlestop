@@ -8,11 +8,12 @@ Description=throttlestop
 [Service]
 Type=oneshot
 User=root
-{}
+{exec_lines}
 
 [Install]
 WantedBy=multi-user.target
 """
+
 
 timer_script = """
 [Unit]
@@ -39,7 +40,6 @@ def main():
 
     lines = []
 
-    print("Enter throttlestop commands:")
     line_prefix = f"{sys.executable} -m throttlestop "
     exec_line = "ExecStart={}"
 
@@ -50,9 +50,10 @@ def main():
 
         lines.append(exec_line.format(line_prefix + line))
 
-
     target = Path("/etc/systemd/system/throttlestop.timer")
     target.write_text(timer_script.format(interval=args.interval))
 
     service = Path("/etc/systemd/system/throttlestop.service")
-    service.write_text(service_script.format('\n'.join(lines)))
+    service.write_text(service_script.format())
+
+    print("Finished configuring service!")

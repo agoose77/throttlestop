@@ -4,8 +4,15 @@ Simple tool to manage thermal behaviour on Linux
 Install tool with 
 `sudo pip install git+https://github.com/agoose77/throttlestop.git#egg=throttlestop`
 
-Install services with
-`sudo throttlestop-install-service`
+Install service with 30 second interval using 
+`sudo throttlestop-install-service 30`,
+and configure the service using the interactive prompt:
+```bash
+/usr/bin/python3 -m throttlestop voltage '{"cache": -149, "cpu": -149}'
+/usr/bin/python3 -m throttlestop tdp '{"first": {"power_limit": 30}}'
+/usr/bin/python3 -m throttlestop tdp # Hit return to exit
+Finished configuring service!
+```
 
 Activate service with
 ```bash
