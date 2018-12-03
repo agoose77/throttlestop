@@ -1,5 +1,11 @@
 # throttlestop
-Simple tool to manage thermal behaviour on Linux. Requires `msr-tools`:
+Simple tool to manage thermal behaviour on Linux. 
+
+## Disclaimer
+If this tool works, _great_! However, no guarantees are made that it won't hasten the heat death of the universe through the spontaneous combustion of your CPU.
+
+## Installation
+Requires `msr-tools`:
 `sudo apt install msr-tools`
 
 Install tool with 
@@ -24,6 +30,10 @@ systemctl start throttlestop
 systemctl enable throttlestop.timer
 systemctl start throttlestop.timer
 ```
+
+## API
+`throttlestop SECTION [JSON-STRING]`
+where `SECTION` is one of (`tdp`, `voltage`). Provide JSON `JSON-STRING` argument to set the `SECTION` value, or omit it to read (as a JSON string).
 
 Inspired by:
 * https://github.com/mihic/linux-intel-undervolt
