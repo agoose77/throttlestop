@@ -15,7 +15,7 @@ Install tool with
 
 Install service with 30 second interval using 
 `sudo throttlestop-install-service 30`,
-and configure the service using the interactive prompt:
+and configure the service using the interactive prompt (it will find the python binary with `sys.executable`):
 ```bash
 Enter systemd configuration lines:
 /usr/bin/python3 -m throttlestop voltage '{"cache": -149, "cpu": -149}'
