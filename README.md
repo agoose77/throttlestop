@@ -3,6 +3,7 @@ Simple tool to manage thermal behaviour on Linux.
 
 ## Disclaimer
 If this tool works, _great_! However, no guarantees are made that it won't hasten the heat death of the universe through the spontaneous combustion of your CPU.
+![https://imgs.xkcd.com/comics/existential_bug_reports.png](XKCD existential bug reports)
 
 ## Installation
 Requires `msr-tools`:
