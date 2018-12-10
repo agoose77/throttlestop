@@ -13,8 +13,8 @@ Requires `msr-tools`:
 Install tool with 
 `sudo pip install git+https://github.com/agoose77/throttlestop.git#egg=throttlestop`
 
-Install service with 30 second interval using 
-`sudo throttlestop-install-service 30`,
+Install service with 30 second interval and 4 minute delay using 
+`sudo throttlestop-install-service -i 30s -d 4min`,
 and configure the service using the interactive prompt (it will find the python binary with `sys.executable`):
 ```bash
 Enter systemd configuration lines:
