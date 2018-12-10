@@ -158,7 +158,7 @@ def parse_MSR_TEMPERATURE_TARGET(MSR_TEMPERATURE_TARGET):
     return SimpleNamespace(**locals())
 
 def build_MSR_TEMPERATURE_TARGET(_obj):
-    assert 0 <= _obj.offset < _obj.target, f"Target must lie in interval [0, {_obj.base})"
+    assert 0 <= _obj.offset < _obj.base, f"Target must lie in interval [0, {_obj.base})"
     assert 20 < _obj.base <= 100, f"Target must be above approximate room temperature, not {_obj.base}"
     assert _obj.tau < 2**6-1, f"Tau can only fit within 6 bits, {_obj.tau} is too large"
     value = _obj.tau
