@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 from .msr import MSR, parse_MSR_PKG_POWER_LIMIT, parse_MSR_RAPL_POWER_UNIT, build_MSR_PKG_POWER_LIMIT, \
     MSR_PKG_POWER_LIMIT_ADDR, MSR_RAPL_POWER_UNIT_ADDR, MSR_VOLTAGE_ADDR, parse_MSR_UNDERVOLTAGE, build_MSR_VOLTAGE, \
-    MSR_VOLTAGE_PLANES
+    MSR_VOLTAGE_PLANES, MSR_TEMPERATURE_TARGET_ADDR, parse_MSR_TEMPERATURE_TARGET, build_MSR_TEMPERATURE_TARGET
 from .tools import NamespaceEncoder
 
 
@@ -31,6 +31,9 @@ def main():
     voltage_parser = subparsers.add_parser('voltage')
     voltage_parser.add_argument("voltage", default={}, nargs='?', type=loads)
 
+    temperature_parser = subparsers.add_parser('temperature')
+    temperature_parser.add_argument("temperature", default={}, nargs='?', type=loads)
+
     args = parser.parse_args()
     if not vars(args):
         return
@@ -53,7 +56,7 @@ def main():
 
         print(dumps(power_limits, indent=4, cls=NamespaceEncoder))
 
-    else:
+    elif hasattr(args, 'voltage'):
         outputs = {}
         voltages = args.voltage
         assert voltages.keys() <= MSR_VOLTAGE_PLANES.keys()
@@ -74,6 +77,19 @@ def main():
 
         print(dumps(outputs, indent=4))
 
+    else:
+        MSR_TEMPERATURE_TARGET = msr.read(MSR_TEMPERATURE_TARGET_ADDR)
+        temperature_target = parse_MSR_TEMPERATURE_TARGET(MSR_TEMPERATURE_TARGET)
+
+        if args.temperature:
+            apply_delta(args.temperature, temperature_target)
+            result = build_MSR_TEMPERATURE_TARGET(temperature_target)
+            msr.write(MSR_TEMPERATURE_TARGET_ADDR, result)
+
+            MSR_TEMPERATURE_TARGET = msr.read(MSR_TEMPERATURE_TARGET_ADDR)
+            temperature_target = parse_MSR_TEMPERATURE_TARGET(MSR_TEMPERATURE_TARGET)
+
+        print(dumps(temperature_target, indent=4, cls=NamespaceEncoder))
 
 if __name__ == "__main__":
     main()

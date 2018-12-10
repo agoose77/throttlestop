@@ -7,6 +7,8 @@ from plumbum import cmd
 MSR_PKG_POWER_LIMIT_ADDR = 0x610
 MSR_RAPL_POWER_UNIT_ADDR = 0x606
 MSR_VOLTAGE_ADDR = 0x150
+MSR_TEMPERATURE_TARGET_ADDR = 0x1A2
+
 MSR_VOLTAGE_PLANES = {
     'cpu': 0,
     'gpu': 1,
@@ -148,3 +150,17 @@ def build_MSR_VOLTAGE(obj, allow_overvoltage=False):
 
     return 1 << 63 | (obj.plane << 32 + 4 + 4) | (1 << (32 + 4)) | ((offset is not None) << 32) | \
            (offset or 0)
+
+def parse_MSR_TEMPERATURE_TARGET(MSR_TEMPERATURE_TARGET):
+    offset = (MSR_TEMPERATURE_TARGET & before(30)) >> 24
+    base = (MSR_TEMPERATURE_TARGET & before(24)) >> 16
+    tau = MSR_TEMPERATURE_TARGET & before(7)
+    return SimpleNamespace(**locals())
+
+def build_MSR_TEMPERATURE_TARGET(_obj):
+    assert 0 <= _obj.offset < _obj.target, f"Target must lie in interval [0, {_obj.base})"
+    assert 20 < _obj.base <= 100, f"Target must be above approximate room temperature, not {_obj.base}"
+    assert _obj.tau < 2**6-1, f"Tau can only fit within 6 bits, {_obj.tau} is too large"
+    value = _obj.tau
+    value |= _obj.offset << 24
+    return value
