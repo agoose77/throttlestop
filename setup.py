@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='throttlestop',
-    version='0.0.1',
+    version='0.0.2',
     install_requires=['plumbum', 'numpy'],
     url='https://github.com/agoose77/throttlestop',
     license='',
