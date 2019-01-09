@@ -19,7 +19,7 @@ and configure the service using the interactive prompt (it will find the python 
 ```bash
 Enter systemd configuration lines:
 /usr/bin/python3 -m throttlestop voltage '{"cache": -149, "cpu": -149}'
-/usr/bin/python3 -m throttlestop tdp '{"first": {"power_limit": 30}}'
+/usr/bin/python3 -m throttlestop temperature '{"offset": 20}'
 /usr/bin/python3 -m throttlestop # Hit return to exit
 Finished configuring service!
 ```
