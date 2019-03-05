@@ -1,5 +1,5 @@
 # throttlestop
-Simple tool to manage thermal behaviour on Linux. 
+Simple tool to manage thermal behaviour on Linux for Intel CPUs with a MSR. 
 
 ## Disclaimer
 If this tool works, _great_! However, no guarantees are made that it won't hasten the heat death of the universe through the spontaneous combustion of your CPU.
