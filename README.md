@@ -18,8 +18,8 @@ Install service with 30 second interval and 4 minute delay using
 and configure the service using the interactive prompt (it will find the python binary with `sys.executable`):
 ```bash
 Enter systemd configuration lines:
-/usr/bin/python3 -m throttlestop voltage '{"cache": -149, "cpu": -149}'
-/usr/bin/python3 -m throttlestop temperature '{"offset": 20}'
+/usr/bin/python3 -m throttlestop voltage "{\"cache\": -149, \"cpu\": -149}"
+/usr/bin/python3 -m throttlestop temperature "{\"offset\": 20}"
 /usr/bin/python3 -m throttlestop # Hit return to exit
 Finished configuring service!
 ```
