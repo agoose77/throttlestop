@@ -34,9 +34,12 @@ systemctl start throttlestop.timer
 ```
 
 ## API
-`throttlestop SECTION [JSON-STRING]`,
+`sudo throttlestop SECTION [JSON-STRING]`,
 
 where `SECTION` is one of (`tdp`, `voltage`, `temperature`). Provide JSON `JSON-STRING` argument to set the `SECTION` value, or omit it to read (as a JSON string).
+
+The `JSON-STRING` is applied as a delta to the output of the command, which can be obtained using
+`sudo throttlestop SECTION`
 
 Inspired by:
 * https://github.com/mihic/linux-intel-undervolt
