@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "throttlestop"
-version = "0.0.3"
+version = "0.0.4"
 description = "Simple tool to manage throttling problems on Linux"
 authors = ["Angus Hollands <goosey15@gmail.com>"]
 license = "MIT"
@@ -11,6 +11,10 @@ plumbum = "^1.6"
 numpy = "^1.16"
 
 [tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+throttlestop = 'throttlestop.__main__:main'
+throttlestop-install-service = 'throttlestop.install:main'
 
 [build-system]
 requires = ["poetry>=0.12"]

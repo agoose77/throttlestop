@@ -39,6 +39,7 @@ def main():
         return
 
     msr = MSR()
+    msr.validate_install(test_address=MSR_VOLTAGE_ADDR)
 
     if hasattr(args, 'tdp'):
         MSR_RAPL_POWER_UNIT = msr.read(MSR_RAPL_POWER_UNIT_ADDR)

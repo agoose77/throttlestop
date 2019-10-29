@@ -2,7 +2,7 @@ from numbers import Real
 from types import SimpleNamespace
 
 import numpy as np
-from plumbum import cmd
+from plumbum import cmd, local, CommandNotFound, RETCODE
 
 MSR_PKG_POWER_LIMIT_ADDR = 0x610
 MSR_RAPL_POWER_UNIT_ADDR = 0x606
@@ -36,6 +36,20 @@ class MSR:
 
     def __init__(self, password=None):
         self.password = password
+
+    @staticmethod
+    def validate_install(test_address: str):
+        """Ensure that the MSR tools and kernel module have been correctly loaded. Raise `RuntimeError` if not.
+
+        :param test_address: readable MSR address
+        """
+        try:
+            rdmsr = local['rdmsr']
+        except CommandNotFound:
+            raise RuntimeError("Cannot find `rdmsr`. Have you installed `msr-tools`?")
+
+        if rdmsr[test_address] & RETCODE:
+            raise RuntimeError("`rdmsr` call failed. Have you loaded the `msr` module with `modprobe msr`?")
 
     def _run_command(self, command):
         if self.password is None:
