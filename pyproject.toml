@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "throttlestop"
-version = "0.0.4"
+version = "0.0.5"
 description = "Simple tool to manage throttling problems on Linux"
 authors = ["Angus Hollands <goosey15@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.6||^3.7||^3.8"
 plumbum = "^1.6"
 numpy = "^1.16"
 
