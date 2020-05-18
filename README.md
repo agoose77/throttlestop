@@ -12,7 +12,7 @@ Requires `msr-tools`:
 `sudo apt install msr-tools`
 
 Install tool with 
-`sudo pip install throttlestop`
+`sudo pip3 install throttlestop`
 
 Install service with 30 second interval and 4 minute delay using 
 `sudo throttlestop-install-service -i 30s -d 4min`,
