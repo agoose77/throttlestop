@@ -1,4 +1,7 @@
-# throttlestop
+# throttlestop[![pypi-badge][]][pypi] 
+[pypi-badge]: https://img.shields.io/pypi/v/throttlestop
+[pypi]: https://pypi.org/project/throttlestop
+
 Simple tool to manage thermal behaviour on Linux for Intel CPUs with a MSR. 
 
 ## Disclaimer
