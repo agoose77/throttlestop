@@ -1,4 +1,6 @@
-# throttlestop[![pypi-badge][]][pypi] 
+# throttlestop
+[![pypi-badge][]][pypi]
+
 [pypi-badge]: https://img.shields.io/pypi/v/throttlestop
 [pypi]: https://pypi.org/project/throttlestop
 
